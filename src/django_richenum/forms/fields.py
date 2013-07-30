@@ -16,11 +16,11 @@ class EnumField(forms.TypedChoiceField):
         if self.is_plain_enum:
             # coerce defaults to identity function, which is what we want for
             # plain enums
-            kwargs['choices'] = [(v, k) for k, v in enum_cls.iteritems()]
+            kwargs['choices'] = enum_cls.choices
             super(EnumField, self).__init__(*args, **kwargs)
         elif self.is_rich_enum:
             kwargs['coerce'] = enum_cls.from_canonical
-            kwargs['choices'] = [(k.canonical_name, k.display_name) for k in enum_cls._MEMBERS]
+            kwargs['choices'] = enum_cls.choices()
             super(EnumField, self).__init__(*args, **kwargs)
         else:
             raise ValueError('Invalid enum class. Please use an enum, OrderedRichEnum, or RichEnum.')
