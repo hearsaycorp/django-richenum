@@ -18,7 +18,7 @@ setup(
     name='django-richenum',
     version='0.1.0',
     description='Django Enum library for python.',
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     classifiers=[],
     keywords='python django enum richenum',
     url='https://github.com/hearsaycorp/django-richenum',
