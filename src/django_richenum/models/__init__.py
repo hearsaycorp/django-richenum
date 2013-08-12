@@ -1,6 +1,6 @@
-from .fields import EnumField
+from .fields import OrderedRichEnumField
 
 
 __all__ = [
-    'EnumField',
+    'OrderedRichEnumField',
 ]

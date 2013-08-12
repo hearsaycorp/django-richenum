@@ -5,18 +5,18 @@ from django_nose import FastFixtureTestCase
 
 from richenum import OrderedRichEnum, OrderedRichEnumValue
 
-from django_richenum.models import EnumField as ModelEnumField  # NB, this is a *model* field
+from django_richenum.models import OrderedRichEnumField as ModelOrderedRichEnumField  # NB, this is a *model* field
 
 
-class ModelEnumFieldTestSuite(FastFixtureTestCase):
+class ModelOrderedRichEnumFieldTestSuite(FastFixtureTestCase):
     @classmethod
     def setUpClass(cls):
         class NumberEnum(OrderedRichEnum):
             ONE = OrderedRichEnumValue(1, 'one', 'uno')
             TWO = OrderedRichEnumValue(2, 'two', 'deux')
 
-        class EnumFieldTestModel(models.Model):
-            number = ModelEnumField(NumberEnum, default=NumberEnum.ONE)
+        class OrderedRichEnumFieldTestModel(models.Model):
+            number = ModelOrderedRichEnumField(NumberEnum, default=NumberEnum.ONE)
             parent = models.ForeignKey('self', null=True)
 
             class Meta:
@@ -40,8 +40,8 @@ class ModelEnumFieldTestSuite(FastFixtureTestCase):
             );""")
 
         cls.enum = NumberEnum
-        cls.model = EnumFieldTestModel
-        super(ModelEnumFieldTestSuite, cls).setUpClass()
+        cls.model = OrderedRichEnumFieldTestModel
+        super(ModelOrderedRichEnumFieldTestSuite, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
@@ -52,7 +52,7 @@ class ModelEnumFieldTestSuite(FastFixtureTestCase):
             # Raised if the table didn't exist
             pass
         cursor.close()
-        super(ModelEnumFieldTestSuite, cls).tearDownClass()
+        super(ModelOrderedRichEnumFieldTestSuite, cls).tearDownClass()
 
     def test_inits_with_default(self):
         # Verify that we can supply a default value
@@ -97,14 +97,14 @@ class ModelEnumFieldTestSuite(FastFixtureTestCase):
 
     def test_can_allow_nulls(self):
         # Create a duplicate of test class, but allow nulls
-        class EnumFieldTestModelNull(models.Model):
-            number = ModelEnumField(self.enum, default=self.enum.ONE, null=True)
+        class OrderedRichEnumFieldTestModelNull(models.Model):
+            number = ModelOrderedRichEnumField(self.enum, default=self.enum.ONE, null=True)
             parent = models.ForeignKey('self', null=True)
 
             class Meta:
                 db_table = 'utils_enumfieldtestmodel'
                 managed = False
 
-        null_instance = EnumFieldTestModelNull(number=None)
+        null_instance = OrderedRichEnumFieldTestModelNull(number=None)
         null_instance.save()
         self.assertIsNone(null_instance.number)
