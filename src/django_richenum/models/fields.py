@@ -5,7 +5,7 @@ from django.db import models
 from richenum import OrderedRichEnum, OrderedRichEnumValue
 
 
-class EnumField(models.IntegerField):
+class OrderedRichEnumField(models.IntegerField):
     '''Store ints in DB, but expose OrderedRichEnumValues in Python.
 
     '''
@@ -18,7 +18,7 @@ class EnumField(models.IntegerField):
         if not issubclass(ordered_rich_enum, OrderedRichEnum):
             raise TypeError('%s is not an OrderedRichEnum')
         self.enum = ordered_rich_enum
-        super(EnumField, self).__init__(*args, **kwargs)
+        super(OrderedRichEnumField, self).__init__(*args, **kwargs)
 
     def get_default(self):
         '''Override Django's implementation, which casts all default values as
