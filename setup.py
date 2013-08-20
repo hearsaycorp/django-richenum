@@ -2,7 +2,7 @@
 
 # W/o multiprocessing, nosetests can't exit cleanly.
 # (See http://bugs.python.org/issue15881#msg170215)
-import multiprocessing
+import multiprocessing  # noqa
 import os
 import sys
 
@@ -46,7 +46,7 @@ class DjangoTest(TestCommand):
 
         from django.test.simple import DjangoTestSuiteRunner
         runner = DjangoTestSuiteRunner(failfast=False, interactive=False)
-        num_failures = sys.exit(runner.run_tests(self.APPS))
+        sys.exit(runner.run_tests(self.APPS))
 
 
 setup(

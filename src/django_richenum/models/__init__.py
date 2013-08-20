@@ -1,6 +1,6 @@
-from .fields import EnumField
+from .fields import EnumField  # noqa
 
 
-__all__ = [
+__all__ = (
     'EnumField',
-]
+)
