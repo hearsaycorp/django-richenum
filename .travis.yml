@@ -6,12 +6,11 @@ env:
   - DJANGO_VERSION=1.4
   - DJANGO_VERSION=1.5
 install:
-  - "pip install -q pep8 pyflakes pylint --use-mirrors"
+  - "pip install -q flake8 pylint --use-mirrors"
   - "pip install -q Django==$DJANGO_VERSION --use-mirrors"
   - "pip install -e . --use-mirrors"
 before_script:
-  - "pep8 --max-line-length=119 tests src setup.py"
-  - "pyflakes src tests setup.py"
+  - "flake8 tests src setup.py"
   - "pylint -E src/richenum"
   - "pylint -E tests/richenum"
   - "pylint -E setup.py"
