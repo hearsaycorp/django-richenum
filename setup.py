@@ -41,11 +41,10 @@ class DjangoTest(TestCommand):
             CACHES={
                 'default': {
                     'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}},
-            INSTALLED_APPS=('django_nose',) + self.APPS,
-            TEST_RUNNER='django_nose.NoseTestSuiteRunner')
+            INSTALLED_APPS=('django_nose',) + self.APPS)
 
-        from django.test.simple import DjangoTestSuiteRunner
-        runner = DjangoTestSuiteRunner(failfast=False, interactive=False)
+        from django_nose import NoseTestSuiteRunner
+        runner = NoseTestSuiteRunner(failfast=False, interactive=False)
         sys.exit(runner.run_tests(self.APPS))
 
 
