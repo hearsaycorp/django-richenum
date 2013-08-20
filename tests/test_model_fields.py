@@ -34,14 +34,14 @@ class OrderedEnumTests(TestCase):
         # Though it breaks abstraction, allow using index instead of enum
         m = NumNode(number=1)
         m.save()
-        self.assertEqual(m.number.display_name, 'uno')
+        self.assertEqual(m.number.display_name, 'uno')  # pylint: disable=E1101
         self.assertEqual(NumNode.objects.filter(number=1).count(), 1)  # pylint: disable=E1101
 
     def test_allows_canonical(self):
         # Also allow using canonical name
         m = NumNode(number='one')
         m.save()
-        self.assertEqual(m.number.display_name, 'uno')
+        self.assertEqual(m.number.display_name, 'uno')  # pylint: disable=E1101
         self.assertEqual(NumNode.objects.filter(number='one').count(), 1)  # pylint: disable=E1101
 
     def test_default_forbids_nulls(self):

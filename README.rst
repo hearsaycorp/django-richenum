@@ -1,9 +1,10 @@
 ===============
 django-richenum
 ===============
-.. image:: https://travis-ci.org/hearsaycorp/django-richenum.png
+
+.. image:: https://travis-ci.org/hearsaycorp/django-richenum.png?branch=master
     :alt: Build Status
-    :target: https://travis-ci.org/#!/hearsaycorp/django-richenum/
+    :target: https://travis-ci.org/hearsaycorp/django-richenum
 
 .. image:: https://pypip.in/v/django-richenum/badge.png
     :alt: Latest PyPI Version
