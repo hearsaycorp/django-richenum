@@ -1,17 +1,52 @@
 #!/usr/bin/env python
 
+# W/o multiprocessing, nosetests can't exit cleanly.
+# (See http://bugs.python.org/issue15881#msg170215)
+import multiprocessing
+import os
+import sys
+
 from setuptools import setup, find_packages
-from setuptest import test
+from setuptools.command.test import test as TestCommand
 
 
-tests_require = [
-    'django-nose'
-]
+tests_require = (
+    'django-nose',
+)
 
-install_requires = [
+
+install_requires = (
     'Django>=1.4,<1.6',
-    'richenum>=0.1.0,<1.0'
-]
+    'richenum',
+)
+
+
+class DjangoTest(TestCommand):
+    DIRNAME = os.path.dirname(__file__)
+    APPS = ('tests',)
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        from django.conf import settings
+        settings.configure(
+            DEBUG=True,
+            DATABASES={
+                'default': {
+                    'ENGINE': 'django.db.backends.sqlite3',
+                    'NAME': os.path.join(self.DIRNAME, 'database.db')}},
+            CACHES={
+                'default': {
+                    'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}},
+            INSTALLED_APPS=('django_nose',) + self.APPS,
+            TEST_RUNNER='django_nose.NoseTestSuiteRunner')
+
+        from django.test.simple import DjangoTestSuiteRunner
+        runner = DjangoTestSuiteRunner(failfast=False, interactive=False)
+        num_failures = sys.exit(runner.run_tests(self.APPS))
 
 
 setup(
@@ -32,5 +67,5 @@ setup(
     packages=find_packages('src'),
     install_requires=install_requires,
     tests_require=tests_require,
-    test_suite='tests',
+    cmdclass={'test': DjangoTest},
 )
