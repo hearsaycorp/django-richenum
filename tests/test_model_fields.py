@@ -18,7 +18,7 @@ class OrderedEnumTests(TestCase):
         # Support fetching with enum, not index
         m = NumNode(number=Number.ONE)
         m.save()
-        display_name = NumNode.objects.get(number=Number.ONE).number.display_name  # pylint: disable=E1101
+        display_name = NumNode.objects.get(number=Number.ONE).number.display_name
         self.assertEqual(display_name, 'uno')
 
     def test_joins_with_enum(self):
@@ -27,22 +27,22 @@ class OrderedEnumTests(TestCase):
         first.save()
         second = NumNode(number=Number.TWO, parent=first)
         second.save()
-        num_children = NumNode.objects.filter(parent__number=Number.ONE).count()  # pylint: disable=E1101
+        num_children = NumNode.objects.filter(parent__number=Number.ONE).count()
         self.assertEqual(num_children, 1)
 
     def test_allows_index(self):
         # Though it breaks abstraction, allow using index instead of enum
         m = NumNode(number=1)
         m.save()
-        self.assertEqual(m.number.display_name, 'uno')  # pylint: disable=E1101
-        self.assertEqual(NumNode.objects.filter(number=1).count(), 1)  # pylint: disable=E1101
+        self.assertEqual(m.number.display_name, 'uno')
+        self.assertEqual(NumNode.objects.filter(number=1).count(), 1)
 
     def test_allows_canonical(self):
         # Also allow using canonical name
         m = NumNode(number='one')
         m.save()
-        self.assertEqual(m.number.display_name, 'uno')  # pylint: disable=E1101
-        self.assertEqual(NumNode.objects.filter(number='one').count(), 1)  # pylint: disable=E1101
+        self.assertEqual(m.number.display_name, 'uno')
+        self.assertEqual(NumNode.objects.filter(number='one').count(), 1)
 
     def test_default_forbids_nulls(self):
         with self.assertRaises(IntegrityError):
