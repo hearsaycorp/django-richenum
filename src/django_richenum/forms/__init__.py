@@ -1,6 +1,8 @@
-from .fields import EnumField  # noqa
+from .fields import CanonicalEnumField  # noqa
+from .fields import IndexEnumField  # noqa
 
 
 __all__ = (
-    'EnumField',
+    'CanonicalEnumField',
+    'IndexEnumField',
 )

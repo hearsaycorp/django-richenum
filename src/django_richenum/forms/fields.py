@@ -1,26 +1,44 @@
+from abc import ABCMeta
+from abc import abstractmethod
 from django import forms
-from richenum.enums import _BaseRichEnumMetaclass
 
 
-class EnumField(forms.TypedChoiceField):
-    def __init__(self, enum_cls, *args, **kwargs):
-        self.is_plain_enum = enum_cls.__name__ == 'Enum'
-        self.is_rich_enum = isinstance(enum_cls, _BaseRichEnumMetaclass)
+class _BaseEnumField(forms.TypedChoiceField):
+    __metaclass__ = ABCMeta
 
+    def __init__(self, enum, *args, **kwargs):
+        self.enum = enum
         kwargs.setdefault('empty_value', None)
-        if 'choices' in kwargs:
-            raise ValueError('Cannot explicitly supply choices to EnumField')
-        if 'coerce' in kwargs:
-            raise ValueError('Cannot explicitly supply coercion function to EnumField')
 
-        if self.is_plain_enum:
-            # coerce defaults to identity function, which is what we want for
-            # plain enums
-            kwargs['choices'] = enum_cls.choices
-            super(EnumField, self).__init__(*args, **kwargs)
-        elif self.is_rich_enum:
-            kwargs['coerce'] = enum_cls.from_canonical
-            kwargs['choices'] = enum_cls.choices()
-            super(EnumField, self).__init__(*args, **kwargs)
-        else:
-            raise ValueError('Invalid enum class. Please use an enum, OrderedRichEnum, or RichEnum.')
+        if 'choices' in kwargs:
+            raise ValueError('Cannot explicitly supply choices to enum fields.')
+        if 'coerce' in kwargs:
+            raise ValueError('Cannot explicitly supply coercion function to enum fields.')
+
+        kwargs['choices'] = self.get_choices()
+        kwargs['coerce'] = self.coerce_value
+        super(_BaseEnumField, self).__init__(*args, **kwargs)
+
+    @abstractmethod
+    def get_choices(self):
+        pass
+
+    @abstractmethod
+    def coerce_value(self, val):
+        pass
+
+
+class CanonicalEnumField(_BaseEnumField):
+    def get_choices(self):
+        return self.enum.choices()
+
+    def coerce_value(self, name):
+        return self.enum.from_canonical(name)
+
+
+class IndexEnumField(_BaseEnumField):
+    def get_choices(self):
+        return self.enum.choices(value_field='index')
+
+    def coerce_value(self, index):
+        return self.enum.from_index(int(index))
