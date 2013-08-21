@@ -10,7 +10,7 @@ class _Number(OrderedRichEnumValue):
 
 class Number(OrderedRichEnum):
     ONE = _Number(1, 'one', 'uno')
-    TWO = _Number(2, 'two', 'deux')
+    TWO = _Number(2, 'two', 'dos')
 
 
 class _Fruit(RichEnumValue):
