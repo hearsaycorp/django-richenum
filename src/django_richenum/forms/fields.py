@@ -29,6 +29,10 @@ class _BaseEnumField(forms.TypedChoiceField):
 
 
 class CanonicalEnumField(_BaseEnumField):
+    """
+    Uses the RichEnum/OrderedRichEnum canonical_name as form field values
+    """
+
     def get_choices(self):
         return self.enum.choices()
 
@@ -37,6 +41,10 @@ class CanonicalEnumField(_BaseEnumField):
 
 
 class IndexEnumField(_BaseEnumField):
+    """
+    Uses the OrderedRichEnum index as form field values
+    """
+
     def get_choices(self):
         return self.enum.choices(value_field='index')
 
