@@ -7,3 +7,4 @@ Contributors
 | `Akshay Shah <http://github.com/akshayjshah>`_
 | `Dale Hui <http://github.com/dhui>`_
 | `Robert MacCloy <http://github.com/rbm>`_
+| `Ben Lopatin <http://github.com/bennylope>`_
