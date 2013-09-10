@@ -108,3 +108,14 @@ class CanonicalNameEnumField(models.CharField):
             return self.enum.from_canonical(value)
         else:
             raise TypeError('Cannot interpret %s (%s) as an RichEnumValue.' % (value, type(value)))
+
+
+try:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([], [
+        "^django_richenum\.models\.fields\.IndexEnumField",
+        "^django_richenum\.models\.fields\.LaxIndexEnumField",
+        "^django_richenum\.models\.fields\.CanonicalNameEnumField",
+    ])
+except ImportError:
+    pass
