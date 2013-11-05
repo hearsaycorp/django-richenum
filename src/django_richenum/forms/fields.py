@@ -27,6 +27,15 @@ class _BaseEnumField(forms.TypedChoiceField):
     def coerce_value(self, val):
         pass
 
+    def run_validators(self, value):
+        # These have to be from a set, so it's hard for me to imagine a useful
+        # custom validator.
+        # The run_validators method in the superclass checks the value against
+        # None, [], {}, etc, which causes warnings in the RichEnum.__eq__
+        # method... arguably we shouldn't warn in those cases, but for now we
+        # do.
+        pass
+
 
 class CanonicalEnumField(_BaseEnumField):
     """
