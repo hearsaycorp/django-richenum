@@ -16,7 +16,7 @@ tests_require = (
 
 
 install_requires = (
-    'Django>=1.4,<1.6',
+    'Django>=1.4,<1.7',
     'richenum',
 )
 
