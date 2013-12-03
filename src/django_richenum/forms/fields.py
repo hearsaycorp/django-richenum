@@ -1,6 +1,9 @@
 from abc import ABCMeta
 from abc import abstractmethod
 from django import forms
+from django.core.exceptions import ValidationError
+
+from richenum import EnumLookupError
 
 
 class _BaseEnumField(forms.TypedChoiceField):
@@ -36,6 +39,9 @@ class _BaseEnumField(forms.TypedChoiceField):
         # do.
         pass
 
+    def valid_value(self, value):
+        return value in self.enum
+
 
 class CanonicalEnumField(_BaseEnumField):
     """
@@ -46,7 +52,16 @@ class CanonicalEnumField(_BaseEnumField):
         return self.enum.choices()
 
     def coerce_value(self, name):
-        return self.enum.from_canonical(name)
+        try:
+            return self.enum.from_canonical(name)
+        except EnumLookupError as e:
+            raise ValidationError(e.message)
+
+    # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
+    def valid_value(self, value):
+        if isinstance(value, basestring):
+            value = self.coerce_value(value)
+        return super(CanonicalEnumField, self).valid_value(value)
 
 
 class IndexEnumField(_BaseEnumField):
@@ -58,4 +73,21 @@ class IndexEnumField(_BaseEnumField):
         return self.enum.choices(value_field='index')
 
     def coerce_value(self, index):
-        return self.enum.from_index(int(index))
+        try:
+            return self.enum.from_index(int(index))
+        except EnumLookupError as e:
+            raise ValidationError(e.message)
+
+    # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
+    def valid_value(self, value):
+        # In < Dango 1.6, this comes in as a string, so we should flip it to be an int
+        if isinstance(value, basestring):
+            try:
+                value = int(value)
+            except ValueError as e:
+                raise ValidationError(e.message)
+
+        if isinstance(value, int):
+            value = self.coerce_value(value)
+
+        return super(IndexEnumField, self).valid_value(value)
