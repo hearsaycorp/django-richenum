@@ -6,12 +6,13 @@ from django.core.exceptions import ValidationError
 from richenum import EnumLookupError
 
 
-class _BaseEnumField(forms.TypedChoiceField):
+class _BaseEnumField(object):
     __metaclass__ = ABCMeta
+    _empty_value_factory = lambda x: None
 
     def __init__(self, enum, *args, **kwargs):
         self.enum = enum
-        kwargs.setdefault('empty_value', None)
+        kwargs.setdefault('empty_value', self._empty_value_factory())  # Django default is empty string
 
         if 'choices' in kwargs:
             raise ValueError('Cannot explicitly supply choices to enum fields.')
@@ -43,7 +44,7 @@ class _BaseEnumField(forms.TypedChoiceField):
         return value in self.enum
 
 
-class CanonicalEnumField(_BaseEnumField):
+class _BaseCanonicalField(_BaseEnumField):
     """
     Uses the RichEnum/OrderedRichEnum canonical_name as form field values
     """
@@ -61,10 +62,10 @@ class CanonicalEnumField(_BaseEnumField):
     def valid_value(self, value):
         if isinstance(value, basestring):
             value = self.coerce_value(value)
-        return super(CanonicalEnumField, self).valid_value(value)
+        return super(_BaseCanonicalField, self).valid_value(value)
 
 
-class IndexEnumField(_BaseEnumField):
+class _BaseIndexField(_BaseEnumField):
     """
     Uses the OrderedRichEnum index as form field values
     """
@@ -90,4 +91,20 @@ class IndexEnumField(_BaseEnumField):
         if isinstance(value, int):
             value = self.coerce_value(value)
 
-        return super(IndexEnumField, self).valid_value(value)
+        return super(_BaseIndexField, self).valid_value(value)
+
+
+class CanonicalEnumField(_BaseCanonicalField, forms.TypedChoiceField):
+    pass
+
+
+class IndexEnumField(_BaseIndexField, forms.TypedChoiceField):
+    pass
+
+
+class MultipleCanonicalEnumField(_BaseCanonicalField, forms.TypedMultipleChoiceField):
+    _empty_value_factory = lambda x: []
+
+
+class MultipleIndexEnumField(_BaseIndexField, forms.TypedMultipleChoiceField):
+    _empty_value_factory = lambda x: []
