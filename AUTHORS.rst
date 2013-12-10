@@ -8,3 +8,4 @@ Contributors
 | `Dale Hui <http://github.com/dhui>`_
 | `Robert MacCloy <http://github.com/rbm>`_
 | `Ben Lopatin <http://github.com/bennylope>`_
+| `Roger Hu <http://github.com/rogerhu>`_

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.1 (2013-12-09)
+------------------
+    - Single element lists with an empty string in TypedMultipleChoiceField are considered empty values.
+
 1.2.0 (2013-12-03)
 ------------------
     - Add enum-aware versions of TypedMultipleChoiceField.
