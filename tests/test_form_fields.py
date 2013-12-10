@@ -167,6 +167,10 @@ class MultiCanonicalFormTests(TestCase):
         with self.assertRaises(ValueError):
             MultipleCanonicalEnumField(Fruit, choices=choices)
 
+    def test_empty_value(self):
+        form = MultipleCanonicalForm({'num': ['one'], 'fruit': ['apple', 'peach'], 'fruit_optional': ['']})
+        self.assertTrue(form.is_valid())
+
 
 class MultipleIndexForm(forms.Form):
     num = MultipleIndexEnumField(Number)

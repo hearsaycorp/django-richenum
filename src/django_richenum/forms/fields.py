@@ -105,6 +105,14 @@ class IndexEnumField(_BaseIndexField, forms.TypedChoiceField):
 class MultipleCanonicalEnumField(_BaseCanonicalField, forms.TypedMultipleChoiceField):
     _empty_value_factory = lambda x: []
 
+    def __init__(self, *args, **kwargs):
+        super(MultipleCanonicalEnumField, self).__init__(*args, **kwargs)
+
+        # Breaking change in Django v1.6 - https://code.djangoproject.com/ticket/21397
+        # Django's coerce() method must always return a value present in the choices fields.
+        if hasattr(self, 'empty_values'):
+            self.empty_values.append([u''])
+
 
 class MultipleIndexEnumField(_BaseIndexField, forms.TypedMultipleChoiceField):
     _empty_value_factory = lambda x: []
