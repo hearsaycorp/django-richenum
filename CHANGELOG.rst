@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.1 (2014-06-02)
+------------------
+    - Remove uses of BaseException.message.
+
 1.2.0 (2013-12-03)
 ------------------
     - Add enum-aware versions of TypedMultipleChoiceField.

@@ -7,9 +7,9 @@ env:
   - DJANGO_VERSION=1.5
   - DJANGO_VERSION=1.6
 install:
-  - "pip install -q Django==$DJANGO_VERSION --use-mirrors"
-  - "pip install -q flake8 pylint django-nose --use-mirrors"
-  - "pip install -e . --use-mirrors"
+  - "pip install -q Django==$DJANGO_VERSION"
+  - "pip install -q flake8 pylint django-nose"
+  - "pip install -e ."
 before_script:
   - "flake8 tests src setup.py"
   - "pylint --rcfile=pylint.rc src/django_richenum"
