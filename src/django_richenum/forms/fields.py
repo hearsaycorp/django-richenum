@@ -56,7 +56,7 @@ class _BaseCanonicalField(_BaseEnumField):
         try:
             return self.enum.from_canonical(name)
         except EnumLookupError as e:
-            raise ValidationError(e.message)
+            raise ValidationError(str(e))
 
     # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
     def valid_value(self, value):
@@ -77,7 +77,7 @@ class _BaseIndexField(_BaseEnumField):
         try:
             return self.enum.from_index(int(index))
         except EnumLookupError as e:
-            raise ValidationError(e.message)
+            raise ValidationError(str(e))
 
     # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
     def valid_value(self, value):
@@ -86,7 +86,7 @@ class _BaseIndexField(_BaseEnumField):
             try:
                 value = int(value)
             except ValueError as e:
-                raise ValidationError(e.message)
+                raise ValidationError(str(e))
 
         if isinstance(value, int):
             value = self.coerce_value(value)
