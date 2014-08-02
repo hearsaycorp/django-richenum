@@ -12,7 +12,8 @@ class _BaseEnumField(object):
 
     def __init__(self, enum, *args, **kwargs):
         self.enum = enum
-        kwargs.setdefault('empty_value', self._empty_value_factory())  # Django default is empty string
+        # Django default is empty string
+        kwargs.setdefault('empty_value', self._empty_value_factory())  # pylint: disable=E1120
 
         if 'choices' in kwargs:
             raise ValueError('Cannot explicitly supply choices to enum fields.')
