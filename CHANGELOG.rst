@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.2 (2014-08-02)
+------------------
+    - Support Django 1.3
+
 1.2.1 (2014-06-02)
 ------------------
     - Remove uses of BaseException.message.
