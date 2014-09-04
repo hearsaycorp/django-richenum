@@ -41,6 +41,7 @@ class DjangoTest(TestCommand):
             CACHES={
                 'default': {
                     'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}},
+            MIDDLEWARE_CLASSES=['django.middleware.common.CommonMiddleware'],
             INSTALLED_APPS=('django_nose',) + self.APPS)
 
         import django

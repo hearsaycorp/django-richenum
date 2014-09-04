@@ -14,6 +14,7 @@ install:
 script:
   - python setup.py test
   - flake8 tests src setup.py
-  - pylint --rcfile=pylint.rc src/django_richenum
-  - pylint --rcfile=pylint.rc tests
-  - pylint --rcfile=pylint.rc setup.py
+  # FIXME: Once pylint-django supports Django 1.7, install and use it.
+  - if [$DJANGO_VERSION_CEILING -ne "1.8"]; then pylint --rcfile=pylint.rc src/django_richenum; fi
+  - if [$DJANGO_VERSION_CEILING -ne "1.8"]; then pylint --rcfile=pylint.rc tests; fi
+  - if [$DJANGO_VERSION_CEILING -ne "1.8"]; then pylint --rcfile=pylint.rc setup.py; fi
