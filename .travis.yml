@@ -1,19 +1,19 @@
 language: python
 python:
-  - "2.6"
   - "2.7"
 env:
-  - DJANGO_VERSION=1.3
-  - DJANGO_VERSION=1.4
-  - DJANGO_VERSION=1.5
-  - DJANGO_VERSION=1.6
+  - DJANGO_VERSION_CEILING=1.4
+  - DJANGO_VERSION_CEILING=1.5
+  - DJANGO_VERSION_CEILING=1.6
+  - DJANGO_VERSION_CEILING=1.7
+  - DJANGO_VERSION_CEILING=1.8
 install:
-  - "pip install -q Django==$DJANGO_VERSION"
-  - "pip install -q flake8 pylint django-nose"
-  - "pip install -e ."
-before_script:
-  - "flake8 tests src setup.py"
-  - "pylint --rcfile=pylint.rc src/django_richenum"
-  - "pylint --rcfile=pylint.rc tests"
-  - "pylint --rcfile=pylint.rc setup.py"
-script: "python setup.py test"
+  - pip install -q "Django<$DJANGO_VERSION_CEILING"
+  - pip install -q flake8 pylint pylint-django django-nose
+  - pip install -e .
+script:
+  - python setup.py test
+  - flake8 tests src setup.py
+  - pylint --rcfile=pylint.rc src/django_richenum
+  - pylint --rcfile=pylint.rc tests
+  - pylint --rcfile=pylint.rc setup.py

@@ -16,7 +16,7 @@ tests_require = (
 
 
 install_requires = (
-    'Django>=1.3,<1.7',
+    'Django>=1.3,<1.8',
     'richenum',
 )
 
@@ -43,6 +43,11 @@ class DjangoTest(TestCommand):
                     'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}},
             INSTALLED_APPS=('django_nose',) + self.APPS)
 
+        import django
+        if django.VERSION[0] >= 1 and django.VERSION[1] >= 7:
+            # For Django 1.7+, explicitly initialize apps.
+            django.setup()  # pylint: disable=no-member
+
         from django_nose import NoseTestSuiteRunner
         runner = NoseTestSuiteRunner(failfast=False, interactive=False)
         sys.exit(runner.run_tests(self.APPS))
@@ -50,7 +55,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='1.2.2',
+    version='2.0.0',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +

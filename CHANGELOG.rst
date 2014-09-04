@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.0.0 (2014-09-04)
+------------------
+    - Support Django 1.7, drop support for Python 2.6.
+
 1.2.2 (2014-08-02)
 ------------------
     - Support Django 1.3
