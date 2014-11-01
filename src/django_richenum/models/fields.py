@@ -18,6 +18,12 @@ class IndexEnumField(models.IntegerField):
         self.enum = enum
         super(IndexEnumField, self).__init__(*args, **kwargs)
 
+    def deconstruct(self):
+        name, path, args, kwargs = super(IndexEnumField, self).deconstruct()
+        args.insert(0, self.enum)
+
+        return name, path, args, kwargs
+
     def get_default(self):
         # Override Django's implementation, which casts all default values to
         # unicode.
@@ -78,6 +84,12 @@ class CanonicalNameEnumField(models.CharField):
             raise TypeError("%s doesn't support canonical_name lookup." % enum)
         self.enum = enum
         super(CanonicalNameEnumField, self).__init__(*args, **kwargs)
+
+    def deconstruct(self):
+        name, path, args, kwargs = super(CanonicalNameEnumField, self).deconstruct()
+        args.insert(0, self.enum)
+
+        return name, path, args, kwargs
 
     def get_default(self):
         # Override Django's implementation, which casts all default values to
