@@ -1,3 +1,6 @@
+.. role:: python(code)
+          :language: python
+
 ===============
 django-richenum
 ===============
@@ -106,6 +109,24 @@ richenum
 
   | `PyPi <https://pypi.python.org/pypi/richenum/>`_
 
+=====
+Notes
+=====
+
+If you're using Django 1.7+, you'll need to use the :python:`@deconstructible` decorator for your :python:`RichEnumValue` and :python:`OrderedRichEnumValue` classes so Django's migration framework knows how to serialize your :python:`RichEnumValue` and :python:`OrderedRichEnumValue`.
+
+.. code:: python
+
+    >>> from django.utils.deconstruct import deconstructible
+    >>> from richenum import RichEnumValue, OrderedRichEnumValue
+    >>> @deconstructible
+    ... class CustomRichEnumValue(RichEnumValue):
+    ...     pass
+    ...
+    >>> @deconstructible
+    ... class CustomOrderedRichEnumValue(OrderedRichEnumValue):
+    ...     pass
+    ...
 
 ============
 Contributing
