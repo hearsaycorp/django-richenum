@@ -32,15 +32,36 @@ class DjangoTest(TestCommand):
 
     def run_tests(self):
         from django.conf import settings
+
+        db_engine = os.environ.get('DJANGO_DB_ENGINE', 'sqlite')
+        if db_engine == 'mysql':
+            db_settings = {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': os.environ['DJANGO_DB_NAME'],
+                'USER': os.environ['DJANGO_DB_USER'],
+            }
+        elif db_engine == 'postgres':
+            db_settings = {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': os.environ['DJANGO_DB_NAME'],
+                'USER': os.environ['DJANGO_DB_USER'],
+            }
+        elif db_engine == 'sqlite':
+            db_settings = {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(self.DIRNAME, 'database.db'),
+            }
+        else:
+            raise ValueError("Unknown DB engine: %s" % db_engine)
+
         settings.configure(
             DEBUG=True,
-            DATABASES={
-                'default': {
-                    'ENGINE': 'django.db.backends.sqlite3',
-                    'NAME': os.path.join(self.DIRNAME, 'database.db')}},
+            DATABASES={'default': db_settings},
             CACHES={
                 'default': {
-                    'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}},
+                    'BACKEND': 'django.core.cache.backends.dummy.DummyCache'
+                }
+            },
             MIDDLEWARE_CLASSES=['django.middleware.common.CommonMiddleware'],
             INSTALLED_APPS=('django_nose',) + self.APPS)
 
@@ -56,7 +77,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='2.1.0',
+    version='2.2.0',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +

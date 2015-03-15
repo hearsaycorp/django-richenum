@@ -54,6 +54,19 @@ class IndexEnumField(models.IntegerField):
         else:
             raise TypeError('Cannot interpret %s (%s) as an OrderedRichEnumValue.' % (value, type(value)))
 
+    def run_validators(self, value):
+        """
+        Validate that the value is of the correct type for Model field validation
+        Model fields are only validated during ModelForm.clean().
+        https://docs.djangoproject.com/en/1.7/ref/validators/#how-validators-are-run
+        The value used for validation hasn't been converted for DB storage yet
+        but is validated using validators that are DB specific.
+        So we need to cast the value to one used for DB storage.
+        """
+        if isinstance(value, OrderedRichEnumValue):
+            value = value.index
+        return super(IndexEnumField, self).run_validators(value)
+
 
 class LaxIndexEnumField(IndexEnumField):
     '''Like IndexEnumField, but also allows casting to and from
@@ -120,6 +133,19 @@ class CanonicalNameEnumField(models.CharField):
             return self.enum.from_canonical(value)
         else:
             raise TypeError('Cannot interpret %s (%s) as an RichEnumValue.' % (value, type(value)))
+
+    def run_validators(self, value):
+        """
+        Validate that the value is of the correct type for Model field validation
+        Model fields are only validated during ModelForm.clean().
+        https://docs.djangoproject.com/en/1.7/ref/validators/#how-validators-are-run
+        The value used for validation hasn't been converted for DB storage yet
+        but is validated using validators that are DB specific.
+        So we need to cast the value to one used for DB storage.
+        """
+        if isinstance(value, RichEnumValue):
+            value = value.canonical_name
+        return super(CanonicalNameEnumField, self).run_validators(value)
 
 
 try:

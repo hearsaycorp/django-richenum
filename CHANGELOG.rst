@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.2.0 (2015-03-11)
+------------------
+    - Support ModelForms for non-SQLite DB backends
+
+2.1.0 (2014-11-01)
+------------------
+    - Support migration in Django 1.7
+
 2.0.0 (2014-09-04)
 ------------------
     - Support Django 1.7, drop support for Python 2.6.
