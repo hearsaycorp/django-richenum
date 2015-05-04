@@ -6,8 +6,19 @@ from django.core.exceptions import ValidationError
 from richenum import EnumLookupError
 
 
+try:
+    from django.forms.fields import RenameFieldMethods  # pylint: disable=no-name-in-module
+except ImportError:
+    # Fallback for Django versions < 1.8
+    RenameFieldMethods = object
+
+
+class CooperativeMeta(ABCMeta, RenameFieldMethods):
+    pass
+
+
 class _BaseEnumField(object):
-    __metaclass__ = ABCMeta
+    __metaclass__ = CooperativeMeta
     _empty_value_factory = lambda x: None
 
     def __init__(self, enum, *args, **kwargs):
