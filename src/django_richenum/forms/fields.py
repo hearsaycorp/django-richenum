@@ -7,7 +7,7 @@ from richenum import EnumLookupError
 
 
 try:
-    from django.forms.fields import RenameFieldMethods
+    from django.forms.fields import RenameFieldMethods  # pylint: disable=no-name-in-module
 except ImportError:
     # Fallback for Django versions < 1.8
     RenameFieldMethods = object
