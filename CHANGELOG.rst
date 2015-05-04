@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.3.0 (2015-05-04)
+------------------
+    - Support Django 1.8
+
 2.2.0 (2015-03-11)
 ------------------
     - Support ModelForms for non-SQLite DB backends
