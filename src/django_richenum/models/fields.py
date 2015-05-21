@@ -1,5 +1,3 @@
-import numbers
-
 from django.db import models
 
 from richenum import RichEnumValue, OrderedRichEnumValue
@@ -37,9 +35,9 @@ class IndexEnumField(models.IntegerField):
             return None
         elif isinstance(value, OrderedRichEnumValue):
             return value.index
-        elif isinstance(value, numbers.Integral):
-            return value
-        else:
+        try:
+            return int(value)
+        except ValueError:
             raise TypeError('Cannot convert value: %s (%s) to an int.' % (value, type(value)))
 
     def to_python(self, value):
@@ -49,9 +47,9 @@ class IndexEnumField(models.IntegerField):
             return None
         elif isinstance(value, OrderedRichEnumValue):
             return value
-        elif isinstance(value, numbers.Integral):
-            return self.enum.from_index(value)
-        else:
+        try:
+            return self.enum.from_index(int(value))
+        except ValueError:
             raise TypeError('Cannot interpret %s (%s) as an OrderedRichEnumValue.' % (value, type(value)))
 
     def run_validators(self, value):

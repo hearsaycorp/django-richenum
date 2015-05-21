@@ -62,6 +62,14 @@ class IndexFieldTests(TestCase):
         null_instance.save()
         self.assertIsNone(null_instance.num_nullable)
 
+    def test_assignment_casts_number_strings_to_enum_values(self):
+        default_instance = NumNode(num='2')
+        self.assertEqual(default_instance.num, Number.TWO)
+
+    def test_assignment_casts_strings_to_enum_values_fails(self):
+        with self.assertRaises(TypeError):
+            default_instance = NumNode(num='abc')
+
 
 def LaxIndexFieldTests(TestCase):
     def test_allows_canonical(self):
