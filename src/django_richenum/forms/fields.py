@@ -3,7 +3,7 @@ from abc import abstractmethod
 from django import forms
 from django.core.exceptions import ValidationError
 
-from richenum import EnumLookupError
+from richenum import EnumLookupError, OrderedRichEnumValue
 
 
 try:
@@ -104,6 +104,11 @@ class _BaseIndexField(_BaseEnumField):
             value = self.coerce_value(value)
 
         return super(_BaseIndexField, self).valid_value(value)
+
+    def prepare_value(self, value):
+        if isinstance(value, OrderedRichEnumValue):
+            return value.index
+        return super(_BaseIndexField, self).prepare_value(value)
 
 
 class CanonicalEnumField(_BaseCanonicalField, forms.TypedChoiceField):
