@@ -10,6 +10,10 @@ class IndexFieldTests(TestCase):
         default_instance = NumNode()
         self.assertEqual(default_instance.num, Number.ONE)
 
+    def test_inits_with_callable_default(self):
+        default_instance = NumNode()
+        self.assertEqual(default_instance.num_callable_default, Number.ONE)
+
     def test_assignment_allows_enum_values(self):
         default_instance = NumNode()
         default_instance.num = Number.TWO
@@ -76,6 +80,10 @@ class CanonicalNameFieldTests(TestCase):
     def test_inits_with_default(self):
         default_instance = NumNode()
         self.assertEqual(default_instance.num_str, Number.ONE)
+
+    def test_inits_with_callable_default(self):
+        default_instance = NumNode()
+        self.assertEqual(default_instance.num_str_callable_default, Number.ONE)
 
     def test_assignment_allows_enum_values(self):
         default_instance = NumNode()

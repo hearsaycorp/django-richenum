@@ -28,6 +28,8 @@ class IndexEnumField(models.IntegerField):
         # Override Django's implementation, which casts all default values to
         # unicode.
         if self.has_default():
+            if callable(self.default):
+                return self.default()
             return self.default
         return None
 
@@ -108,6 +110,8 @@ class CanonicalNameEnumField(models.CharField):
         # Override Django's implementation, which casts all default values to
         # unicode.
         if self.has_default():
+            if callable(self.default):
+                return self.default()
             return self.default
         return None
 
