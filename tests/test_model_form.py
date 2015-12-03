@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.unittest import TestCase
+from unittest import TestCase
 
 from .models import NumNode
 
