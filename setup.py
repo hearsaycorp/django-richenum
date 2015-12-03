@@ -16,7 +16,7 @@ tests_require = (
 
 
 install_requires = (
-    'Django>=1.3,<1.10',
+    'Django>=1.8,<1.10',
     'richenum',
 )
 
@@ -77,7 +77,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='2.3.3',
+    version='2.4.0',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +
