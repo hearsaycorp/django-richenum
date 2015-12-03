@@ -38,6 +38,12 @@ CanonicalEnumField
 IndexEnumField
   Uses the OrderedRichEnum index as form field values.
 
+-----------
+Django Admin
+-----------
+RichEnumFieldListFilter
+  Enables filtering by RichEnum model fields in the Django admin UI
+
 -----
 Links
 -----
@@ -96,6 +102,14 @@ CanonicalNameEnumField
     >>> m.my_enum
     RichEnumValue - canonical_name: 'bar'  display_name: 'Bar'
     >>> MyModel.objects.filter(my_enum=MyRichEnum.BAR)
+
+----------------------
+RichEnumFieldListFilter
+----------------------
+.. code:: python
+
+    >>> from django_richenum.admin import register_admin_filters
+    >>> register_admin_filters()
 
 
 ================
