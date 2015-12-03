@@ -9,4 +9,4 @@ reports=no
 
 [TYPECHECK]
 # Dynamically-set members missed by the inference system.
-generated-members=index,canonical_name,display_name,is_valid,cleaned_data,objects
+generated-members=index,canonical_name,display_name,is_valid,cleaned_data,objects,save,prepare_value
