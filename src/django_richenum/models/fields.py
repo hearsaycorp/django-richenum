@@ -44,6 +44,11 @@ class IndexEnumField(models.IntegerField):
         else:
             raise TypeError('Cannot convert value: %s (%s) to an int.' % (value, type(value)))
 
+    def from_db_value(self, value, expression, connection, context):
+        if value is None:
+            return value
+        return self.enum.from_index(value)
+
     def to_python(self, value):
         # Convert value to OrderedRichEnumValue. (Called on *all* assignments
         # to the field, including object creation from a DB record.)
@@ -80,6 +85,11 @@ class LaxIndexEnumField(IndexEnumField):
         if isinstance(value, basestring):
             return self.enum.from_canonical(value).index
         return super(LaxIndexEnumField, self).get_prep_value(value)
+
+    def from_db_value(self, value, expression, connection, context):
+        if isinstance(value, six.string_types):
+            return self.enum.from_canonical(value)
+        return super(LaxIndexEnumField, self).from_db_value(value, expression, connection, context)
 
     def to_python(self, value):
         if isinstance(value, basestring):
@@ -125,6 +135,11 @@ class CanonicalNameEnumField(models.CharField):
             return value
         else:
             raise TypeError('Cannot convert value: %s (%s) to a string.' % (value, type(value)))
+
+    def from_db_value(self, value, expression, connection, context):
+        if value is None:
+            return value
+        return self.enum.from_canonical(value)
 
     def to_python(self, value):
         # Convert value to RichEnumValue. (Called on *all* assignments
