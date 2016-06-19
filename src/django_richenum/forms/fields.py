@@ -19,7 +19,9 @@ class CooperativeMeta(ABCMeta, RenameFieldMethods):
 
 class _BaseEnumField(object):
     __metaclass__ = CooperativeMeta
-    _empty_value_factory = lambda x: None
+
+    def _empty_value_factory(self):
+        return None
 
     def __init__(self, enum, *args, **kwargs):
         self.enum = enum
@@ -120,8 +122,10 @@ class IndexEnumField(_BaseIndexField, forms.TypedChoiceField):
 
 
 class MultipleCanonicalEnumField(_BaseCanonicalField, forms.TypedMultipleChoiceField):
-    _empty_value_factory = lambda x: []
+    def _empty_value_factory(self):
+        return []
 
 
 class MultipleIndexEnumField(_BaseIndexField, forms.TypedMultipleChoiceField):
-    _empty_value_factory = lambda x: []
+    def _empty_value_factory(self):
+        return []
