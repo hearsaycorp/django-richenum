@@ -1,5 +1,7 @@
 from abc import ABCMeta
 from abc import abstractmethod
+import six
+
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -19,7 +21,9 @@ class CooperativeMeta(ABCMeta, RenameFieldMethods):
 
 class _BaseEnumField(object):
     __metaclass__ = CooperativeMeta
-    _empty_value_factory = lambda x: None
+
+    def _empty_value_factory(self):
+        return None
 
     def __init__(self, enum, *args, **kwargs):
         self.enum = enum
@@ -72,7 +76,7 @@ class _BaseCanonicalField(_BaseEnumField):
 
     # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
     def valid_value(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, six.string_types):
             value = self.coerce_value(value)
         return super(_BaseCanonicalField, self).valid_value(value)
 
@@ -94,7 +98,7 @@ class _BaseIndexField(_BaseEnumField):
     # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
     def valid_value(self, value):
         # In < Dango 1.6, this comes in as a string, so we should flip it to be an int
-        if isinstance(value, basestring):
+        if isinstance(value, six.string_types):
             try:
                 value = int(value)
             except ValueError as e:
@@ -120,8 +124,10 @@ class IndexEnumField(_BaseIndexField, forms.TypedChoiceField):
 
 
 class MultipleCanonicalEnumField(_BaseCanonicalField, forms.TypedMultipleChoiceField):
-    _empty_value_factory = lambda x: []
+    def _empty_value_factory(self):
+        return []
 
 
 class MultipleIndexEnumField(_BaseIndexField, forms.TypedMultipleChoiceField):
-    _empty_value_factory = lambda x: []
+    def _empty_value_factory(self):
+        return []
