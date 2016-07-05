@@ -1,6 +1,9 @@
 language: python
 python:
   - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
 sudo: false
 env:
   - DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=sqlite
@@ -12,8 +15,11 @@ env:
 
 install:
   - pip install "Django<$DJANGO_VERSION_CEILING" mysqlclient psycopg2
-  - pip install -q flake8 pylint pylint-django django-nose
+  - pip install -q flake8 pylint nose six pylint-django django-nose
   - pip install -e .
+  # pylint needs unittest2 to check the test code.
+  - python -c "import six; exit(not six.PY3)" || pip install unittest2
+
 before_script:
   - "mysql -e 'create database testdb;'"
   - "psql -c 'create database testdb;' -U postgres"
