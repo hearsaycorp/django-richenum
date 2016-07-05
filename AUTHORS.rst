@@ -1,10 +1,11 @@
 Developed and maintained by `Hearsay Social, Inc.
-<http://hearsaysocial.com>`_.
+<https://hearsaysocial.com>`_.
 
 Contributors
 ============
-| `Adam DePue <http://github.com/adepue>`_
-| `Akshay Shah <http://github.com/akshayjshah>`_
-| `Dale Hui <http://github.com/dhui>`_
-| `Robert MacCloy <http://github.com/rbm>`_
-| `Ben Lopatin <http://github.com/bennylope>`_
+| `Adam DePue <https://github.com/adepue>`_
+| `Akshay Shah <https://github.com/akshayjshah>`_
+| `Dale Hui <https://github.com/dhui>`_
+| `Robert MacCloy <https://github.com/rbm>`_
+| `Ben Lopatin <https://github.com/bennylope>`_
+| `Asher Foa <https://github.com/asherf>`_
