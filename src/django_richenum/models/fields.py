@@ -74,6 +74,14 @@ class IndexEnumField(models.IntegerField):
             value = value.index
         return super(IndexEnumField, self).run_validators(value)
 
+    def formfield(self, **kwargs):
+        # import here to avoid circular imports
+        from django_richenum.forms.fields import IndexEnumField as IndexEnumFormField
+
+        defaults = {"enum": self.enum, "form_class": IndexEnumFormField,
+                    "choices_form_class": IndexEnumFormField}
+        return super(IndexEnumField, self).formfield(**defaults)
+
 
 class LaxIndexEnumField(IndexEnumField):
     '''Like IndexEnumField, but also allows casting to and from
@@ -165,6 +173,16 @@ class CanonicalNameEnumField(models.CharField):
         if isinstance(value, RichEnumValue):
             value = value.canonical_name
         return super(CanonicalNameEnumField, self).run_validators(value)
+
+    def formfield(self, **kwargs):
+        # import here to avoid circular imports
+        from django_richenum.forms.fields import CanonicalEnumField as CanonicalEnumFormField
+
+        defaults = {"enum": self.enum, "form_class": CanonicalEnumFormField,
+                    "choices_form_class": CanonicalEnumFormField}
+        # Don't use super(CanonicalNameEnumField, self) since
+        # that'll send the unsupported max_length kwarg to the CanonicalEnumFormField
+        return super(models.CharField, self).formfield(**defaults)  # pylint: disable=E1003
 
 
 try:

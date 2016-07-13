@@ -2,6 +2,11 @@ from django.contrib import admin
 
 from .filters import RichEnumFieldListFilter
 from ..models.fields import IndexEnumField, LaxIndexEnumField, CanonicalNameEnumField
+from .options import RichEnumModelAdmin
+
+__all__ = [
+    "RichEnumModelAdmin"
+]
 
 
 __registered = False
