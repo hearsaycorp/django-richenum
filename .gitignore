@@ -2,7 +2,9 @@
 
 # C extensions
 *.so
-
+.idea
+.virtualenv*
+include
 # Packages
 *.egg
 *.egg-info
