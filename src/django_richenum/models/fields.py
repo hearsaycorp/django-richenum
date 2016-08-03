@@ -10,7 +10,6 @@ class IndexEnumField(models.IntegerField):
 
     '''
     description = 'Efficient storage for OrderedRichEnums'
-    __metaclass__ = models.SubfieldBase
 
     def __init__(self, enum, *args, **kwargs):
         if not hasattr(enum, 'from_index'):
@@ -110,7 +109,6 @@ class CanonicalNameEnumField(models.CharField):
 
     '''
     description = 'Storage for RichEnums'
-    __metaclass__ = models.SubfieldBase
 
     def __init__(self, enum, *args, **kwargs):
         if not hasattr(enum, 'from_canonical'):
