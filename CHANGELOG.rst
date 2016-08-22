@@ -1,6 +1,23 @@
 Changelog
 =========
 
+3.2.0 (2016-08-22)
+------------------
+    - Python 3.4 & 3.5 support
+
+3.1.0 (2015-08-02)
+------------------
+    - Django 1.10 support
+
+3.0.1 (2015-07-13)
+------------------
+    - Prepare for python 3 support
+
+2.4.1 (2015-05-04)
+------------------
+    - replace mysql client library (for tests)
+    - stop using lambdas
+
 2.3.0 (2015-05-04)
 ------------------
     - Support Django 1.8
