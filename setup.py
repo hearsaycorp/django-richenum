@@ -84,7 +84,17 @@ setup(
         open('README.rst').read() + '\n\n' +
         open('CHANGELOG.rst').read() + '\n\n' +
         open('AUTHORS.rst').read()),
-    classifiers=[],
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: Implementation :: CPython',
+    ],
     keywords='python django enum richenum',
     url='https://github.com/hearsaycorp/django-richenum',
     author='Hearsay Social',
