@@ -215,9 +215,9 @@ class CanonicalNameEnumField(models.CharField):
 try:
     from south.modelsinspector import add_introspection_rules
     add_introspection_rules([], [
-        "^django_richenum\.models\.fields\.IndexEnumField",
-        "^django_richenum\.models\.fields\.LaxIndexEnumField",
-        "^django_richenum\.models\.fields\.CanonicalNameEnumField",
+        r"^django_richenum\.models\.fields\.IndexEnumField",
+        r"^django_richenum\.models\.fields\.LaxIndexEnumField",
+        r"^django_richenum\.models\.fields\.CanonicalNameEnumField",
     ])
 except ImportError:
     pass
