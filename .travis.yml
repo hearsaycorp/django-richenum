@@ -1,8 +1,8 @@
 language: python
 python:
   - "2.7"
-  - "3.4"
   - "3.5"
+  - "3.6"
 sudo: false
 env:
   - DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=sqlite
@@ -20,7 +20,7 @@ env:
 
 install:
   - pip install "Django<$DJANGO_VERSION_CEILING" mysqlclient psycopg2
-  - pip install -q flake8 pylint pylint-django django-nose
+  - pip install -q flake8 pylint pylint-django-forked django-nose
   - pip install -e .
 before_script:
   - "mysql -e 'create database testdb;'"
