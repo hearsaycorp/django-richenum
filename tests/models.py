@@ -17,6 +17,6 @@ class NumNode(models.Model):
     num_lax = LaxIndexEnumField(Number, default=Number.ONE)
     num_str = CanonicalNameEnumField(Number, default=Number.ONE, max_length=5)
     num_str_nullable = CanonicalNameEnumField(Number, default=Number.ONE, max_length=5, null=True)
-    parent = models.ForeignKey('self', null=True)
+    parent = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
     num_callable_default = IndexEnumField(Number, default=default_num)
     num_str_callable_default = CanonicalNameEnumField(Number, default=default_num, max_length=5)
