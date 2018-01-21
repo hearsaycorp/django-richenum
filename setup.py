@@ -78,7 +78,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='3.2.1',
+    version='3.2.2',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +
