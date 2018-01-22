@@ -16,7 +16,7 @@ tests_require = (
 
 
 install_requires = (
-    'Django>=1.8,<1.12',
+    'Django>=1.8,<2.1',
     'richenum',
     'six',
 )
@@ -67,9 +67,7 @@ class DjangoTest(TestCommand):
             INSTALLED_APPS=('django_nose',) + self.APPS)
 
         import django
-        if django.VERSION[0] >= 1 and django.VERSION[1] >= 7:
-            # For Django 1.7+, explicitly initialize apps.
-            django.setup()  # pylint: disable=no-member
+        django.setup()
 
         from django_nose import NoseTestSuiteRunner
         runner = NoseTestSuiteRunner(failfast=False, interactive=False)
@@ -78,7 +76,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='3.2.2',
+    version='3.3.0',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +
@@ -91,8 +89,8 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     keywords='python django enum richenum',

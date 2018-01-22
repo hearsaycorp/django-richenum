@@ -1,6 +1,14 @@
 Changelog
 =========
 
+3.3.0 (2018-01-21)
+------------------
+    - removed Python 3.4
+    - add support for Python 3.6
+    - add support for Django 2.0
+    - Properly mark raw strings (used as regex)
+
+
 3.2.0 (2016-08-22)
 ------------------
     - Python 3.4 & 3.5 support
