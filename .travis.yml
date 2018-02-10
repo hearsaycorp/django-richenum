@@ -4,47 +4,11 @@ sudo: false
 matrix:
   include:
       - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=sqlite
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=sqlite
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=sqlite
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 2.7
         env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=sqlite
       - python: 2.7
         env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
       - python: 2.7
         env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=sqlite
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=sqlite
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=sqlite
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
       - python: 3.5
         env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=sqlite
       - python: 3.5
@@ -57,24 +21,6 @@ matrix:
         env: DJANGO_VERSION_CEILING=2.1 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
       - python: 3.5
         env: DJANGO_VERSION_CEILING=2.1 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=sqlite
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.9 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=sqlite
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.10 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=sqlite
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=postgres DJANGO_DB_NAME=testdb DJANGO_DB_USER=postgres
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.11 DJANGO_DB_ENGINE=mysql DJANGO_DB_NAME=testdb DJANGO_DB_USER=travis
       - python: 3.6
         env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=sqlite
       - python: 3.6
