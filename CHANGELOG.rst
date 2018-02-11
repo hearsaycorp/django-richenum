@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.4.0 (2018-02-10)
+------------------
+    - Drop support for old Django versions
+
+
 3.3.0 (2018-01-21)
 ------------------
     - removed Python 3.4
