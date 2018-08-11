@@ -38,7 +38,7 @@ matrix:
 
 install:
   - pip install "Django<$DJANGO_VERSION_CEILING" mysqlclient psycopg2
-  - pip install -q flake8 pylint pylint-django django-nose
+  - pip install -q flake8 'pylint<2.0' 'pylint-django<2.0' django-nose
   - pip install -e .
 before_script:
   - "mysql -e 'create database testdb;'"
