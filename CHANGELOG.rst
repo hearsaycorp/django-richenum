@@ -1,6 +1,14 @@
 Changelog
 =========
 
+
+3.5.0 (2018-09-10)
+------------------
+    - Fix [deprecation of context param for Field.from_db_value](https://code.djangoproject.com/ticket/28370)
+    - Support for Django 2.1
+    - Switch tests suite to use pytest
+    - Remove pylint-django plugin, no longer needed
+
 3.4.0 (2018-02-10)
 ------------------
     - Drop support for old Django versions
