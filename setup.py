@@ -16,7 +16,7 @@ tests_require = (
 
 
 install_requires = (
-    'Django>=1.11,<2.1',
+    'Django>=1.11,<2.2',
     'richenum',
     'six',
 )
@@ -64,7 +64,17 @@ class DjangoTest(TestCommand):
                 }
             },
             MIDDLEWARE_CLASSES=['django.middleware.common.CommonMiddleware'],
-            INSTALLED_APPS=('django_nose',) + self.APPS)
+            INSTALLED_APPS=(
+                # Default Django apps from settings template
+                # https://github.com/django/django/blob/2.1/django/conf/project_template/project_name/settings.py-tpl
+                'django.contrib.admin',
+                'django.contrib.auth',
+                'django.contrib.contenttypes',
+                'django.contrib.sessions',
+                'django.contrib.messages',
+                'django.contrib.staticfiles',
+                # 3rd party apps
+                'django_nose',) + self.APPS)
 
         import django
         django.setup()
