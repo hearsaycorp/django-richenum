@@ -16,6 +16,7 @@ bin
 var
 sdist
 develop-eggs
+.pytest_cache
 .installed.cfg
 lib
 lib64
