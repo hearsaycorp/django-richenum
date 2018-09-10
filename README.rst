@@ -9,7 +9,7 @@ django-richenum
     :alt: Build Status
     :target: https://travis-ci.org/hearsaycorp/django-richenum
 
-.. image:: https://pypip.in/v/django-richenum/badge.png
+.. image:: https://img.shields.io/pypi/v/django-richenum.svg
     :alt: Latest PyPI Version
     :target: https://pypi.python.org/pypi/django-richenum/
 
