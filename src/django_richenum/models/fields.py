@@ -66,7 +66,9 @@ class IndexEnumField(models.IntegerField):
         else:
             raise TypeError('Cannot convert value: %s (%s) to an int.' % (value, type(value)))
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection, *args):
+        # context param is deprecated in Django 2.x will be removed in Django 3.x
+        # having *args allows this code to run in Django 1.x and Django 2.x
         if value is None:
             return value
         return self.enum.from_index(value)
@@ -116,10 +118,12 @@ class LaxIndexEnumField(IndexEnumField):
             return self.enum.from_canonical(value).index
         return super(LaxIndexEnumField, self).get_prep_value(value)
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection, *args):
+        # context param is deprecated in Django 2.x will be removed in Django 3.x
+        # having *args allows this code to run in Django 1.x and Django 2.x
         if isinstance(value, six.string_types):
             return self.enum.from_canonical(value)
-        return super(LaxIndexEnumField, self).from_db_value(value, expression, connection, context)
+        return super(LaxIndexEnumField, self).from_db_value(value, expression, connection, *args)
 
     def to_python(self, value):
         if isinstance(value, six.string_types):
@@ -171,7 +175,9 @@ class CanonicalNameEnumField(models.CharField):
         else:
             raise TypeError('Cannot convert value: %s (%s) to a string.' % (value, type(value)))
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection, *args):
+        # context param is deprecated in Django 2.x will be removed in Django 3.x
+        # having *args allows this code to run in Django 1.x and Django 2.x
         if value is None:
             return value
         return self.enum.from_canonical(value)
