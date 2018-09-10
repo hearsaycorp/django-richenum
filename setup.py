@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-
-# W/o multiprocessing, nosetests can't exit cleanly.
-# (See http://bugs.python.org/issue15881#msg170215)
-import multiprocessing  # noqa
 import os
 import sys
 
@@ -11,7 +7,8 @@ from setuptools.command.test import test as TestCommand
 
 
 tests_require = (
-    'django-nose',
+    'pytest',
+    'pytest-django',
 )
 
 
@@ -72,16 +69,12 @@ class DjangoTest(TestCommand):
                 'django.contrib.contenttypes',
                 'django.contrib.sessions',
                 'django.contrib.messages',
-                'django.contrib.staticfiles',
-                # 3rd party apps
-                'django_nose',) + self.APPS)
+                'django.contrib.staticfiles') + self.APPS)
 
         import django
+        import pytest
         django.setup()
-
-        from django_nose import NoseTestSuiteRunner
-        runner = NoseTestSuiteRunner(failfast=False, interactive=False)
-        sys.exit(runner.run_tests(self.APPS))
+        sys.exit(pytest.main(["tests/"]))
 
 
 setup(
