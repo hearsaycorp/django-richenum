@@ -29,20 +29,23 @@ class DjangoTest(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
+        import pytest
         from django.conf import settings
+        import django
 
         db_engine = os.environ.get('DJANGO_DB_ENGINE', 'sqlite')
+        db_user = os.environ.get('DJANGO_DB_USER')
         if db_engine == 'mysql':
             db_settings = {
                 'ENGINE': 'django.db.backends.mysql',
-                'NAME': os.environ['DJANGO_DB_NAME'],
-                'USER': os.environ['DJANGO_DB_USER'],
+                'NAME': 'testdb',
+                'USER': db_user or 'travis',
             }
         elif db_engine == 'postgres':
             db_settings = {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': os.environ['DJANGO_DB_NAME'],
-                'USER': os.environ['DJANGO_DB_USER'],
+                'NAME': 'testdb',
+                'USER': db_user or 'postgres',
             }
         elif db_engine == 'sqlite':
             db_settings = {
@@ -71,8 +74,6 @@ class DjangoTest(TestCommand):
                 'django.contrib.messages',
                 'django.contrib.staticfiles') + self.APPS)
 
-        import django
-        import pytest
         django.setup()
         sys.exit(pytest.main(["tests/"]))
 
