@@ -1,6 +1,9 @@
 dist: xenial
 language: python
 sudo: false
+services:
+  - mysql
+  - postgresql
 
 matrix:
   include:
