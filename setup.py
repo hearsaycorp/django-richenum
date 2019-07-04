@@ -7,7 +7,7 @@ from setuptools.command.test import test as TestCommand
 
 
 tests_require = (
-    'pytest',
+    'pytest<5.0',
     'pytest-django',
 )
 
