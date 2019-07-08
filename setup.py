@@ -7,7 +7,7 @@ from setuptools.command.test import test as TestCommand
 
 
 tests_require = (
-    'pytest',
+    'pytest<5.0',
     'pytest-django',
 )
 
@@ -29,20 +29,23 @@ class DjangoTest(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
+        import pytest
         from django.conf import settings
+        import django
 
         db_engine = os.environ.get('DJANGO_DB_ENGINE', 'sqlite')
+        db_user = os.environ.get('DJANGO_DB_USER')
         if db_engine == 'mysql':
             db_settings = {
                 'ENGINE': 'django.db.backends.mysql',
-                'NAME': os.environ['DJANGO_DB_NAME'],
-                'USER': os.environ['DJANGO_DB_USER'],
+                'NAME': 'testdb',
+                'USER': db_user or 'travis',
             }
         elif db_engine == 'postgres':
             db_settings = {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': os.environ['DJANGO_DB_NAME'],
-                'USER': os.environ['DJANGO_DB_USER'],
+                'NAME': 'testdb',
+                'USER': db_user or 'postgres',
             }
         elif db_engine == 'sqlite':
             db_settings = {
@@ -71,8 +74,6 @@ class DjangoTest(TestCommand):
                 'django.contrib.messages',
                 'django.contrib.staticfiles') + self.APPS)
 
-        import django
-        import pytest
         django.setup()
         sys.exit(pytest.main(["tests/"]))
 
@@ -88,12 +89,16 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
+        'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.1',
+        'Framework :: Django :: 2.2',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     keywords='python django enum richenum',

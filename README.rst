@@ -13,6 +13,14 @@ django-richenum
     :alt: Latest PyPI Version
     :target: https://pypi.python.org/pypi/django-richenum/
 
+.. image:: https://img.shields.io/pypi/pyversions/django-richenum.svg
+    :alt: Python versions
+    :target: https://pypi.org/project/django-richenum/
+
+.. image:: https://img.shields.io/pypi/dm/django-richenum.svg
+  :alt: Pypi Downloads
+  :target: https://pypi.org/project/django-richenum/
+
 =====
 About
 =====
