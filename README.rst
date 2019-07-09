@@ -1,7 +1,6 @@
 .. role:: python(code)
           :language: python
 
-===============
 django-richenum
 ===============
 
@@ -21,14 +20,12 @@ django-richenum
   :alt: Pypi Downloads
   :target: https://pypi.org/project/django-richenum/
 
-=====
 About
 =====
 A Django extension of richenum for Python. If you're unfamiliar with richenums, please read up on them (see `Related Packages`_) before using django-richenum.
 
------------
 Model Fields
------------
+------------
 IndexEnumField
   Store ints in DB, but expose OrderedRichEnumValues in Python.
 CanonicalNameEnumField
@@ -38,7 +35,6 @@ LaxIndexEnumField
   Like IndexEnumField, but also allows casting to and from canonical names.
   Mainly used to help migrate existing code that uses strings as database values.
 
------------
 Form Fields
 -----------
 CanonicalEnumField
@@ -46,29 +42,25 @@ CanonicalEnumField
 IndexEnumField
   Uses the OrderedRichEnum index as form field values.
 
------------
 Django Admin
------------
+------------
 RichEnumFieldListFilter
   Enables filtering by RichEnum model fields in the Django admin UI
 
------
 Links
 -----
-| `GitHub <https://github.com/hearsaycorp/django-richenum>`_
-| `PyPi <https://pypi.python.org/pypi/django-richenum/>`_
+| `GitHub: django-richenum <https://github.com/hearsaycorp/django-richenum>`_
+| `PyPi: django-richenum <https://pypi.python.org/pypi/django-richenum/>`_
 
-============
 Installation
 ============
 .. code:: bash
 
     $ pip install django-richenum
 
-=============
 Example Usage
 =============
---------------
+
 IndexEnumField
 --------------
 .. code:: python
@@ -90,7 +82,6 @@ IndexEnumField
     >>> MyModel.objects.filter(my_enum=MyOrderedRichEnum.BAR)
 
 
-----------------------
 CanonicalNameEnumField
 ----------------------
 .. code:: python
@@ -111,27 +102,24 @@ CanonicalNameEnumField
     RichEnumValue - canonical_name: 'bar'  display_name: 'Bar'
     >>> MyModel.objects.filter(my_enum=MyRichEnum.BAR)
 
-----------------------
 RichEnumFieldListFilter
-----------------------
+-----------------------
 .. code:: python
 
     >>> from django_richenum.admin import register_admin_filters
     >>> register_admin_filters()
 
 
-================
 Related Packages
 ================
 
 richenum
   Package implementing RichEnum and OrderedRichEnum that django-richenum depends on.
 
-  | `GitHub <https://github.com/hearsaycorp/richenum>`_
+  | `GitHub: richenum <https://github.com/hearsaycorp/richenum>`_
 
-  | `PyPi <https://pypi.python.org/pypi/richenum/>`_
+  | `PyPi: richenum <https://pypi.python.org/pypi/richenum/>`_
 
-=====
 Notes
 =====
 
@@ -150,7 +138,6 @@ If you're using Django 1.7+, you'll need to use the :python:`@deconstructible` d
     ...     pass
     ...
 
-============
 Contributing
 ============
 
