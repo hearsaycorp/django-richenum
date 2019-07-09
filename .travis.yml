@@ -1,85 +1,19 @@
 dist: xenial
 language: python
 sudo: false
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+  - "3.7"
 services:
   - mysql
   - postgresql
 
-matrix:
-  include:
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=sqlite
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=postgres
-      - python: 2.7
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=mysql
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=sqlite
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=postgres
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=mysql
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=sqlite
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=postgres
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=mysql
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=sqlite
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=postgres
-      - python: 3.5
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=mysql
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=sqlite
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=postgres
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=mysql
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=sqlite
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=postgres
-      - python: 3.6
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=mysql
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=sqlite
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=postgres
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=mysql
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=sqlite
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=postgres
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=1.12 DJANGO_DB_ENGINE=mysql
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=sqlite
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=postgres
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.2 DJANGO_DB_ENGINE=mysql
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=sqlite
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=postgres
-      - python: 3.7
-        env: DJANGO_VERSION_CEILING=2.3 DJANGO_DB_ENGINE=mysql
-
-
-
-install:
-  - pip install "Django<$DJANGO_VERSION_CEILING" mysqlclient psycopg2
-  - pip install -q flake8 pylint "pytest<5.0" pytest-django
-  - pip install -e .
+install: pip install tox-travis
 before_script:
   - "mysql -e 'create database testdb;'"
-  - "psql -c 'create database testdb;' -U postgres"
-script:
-  - python setup.py test
-  - flake8 tests src setup.py
-  - pylint --rcfile=pylint.rc src/django_richenum
-  - pylint --rcfile=pylint.rc tests
-  - pylint --rcfile=pylint.rc setup.py
+  - "psql -c 'create database testdb;' -U travis"
+script: 
+  - tox
+  - tox -e lint
