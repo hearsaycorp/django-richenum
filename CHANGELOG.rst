@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.6.0 (2019-07-09)
+------------------
+    - Support for Django 2.2
+    - Support for Python 3.7
+    - Remove support for Django 2.0
 
 3.5.0 (2018-09-10)
 ------------------
@@ -20,7 +25,6 @@ Changelog
     - add support for Python 3.6
     - add support for Django 2.0
     - Properly mark raw strings (used as regex)
-
 
 3.2.0 (2016-08-22)
 ------------------
