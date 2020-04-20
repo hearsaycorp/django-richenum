@@ -33,19 +33,26 @@ class DjangoTest(TestCommand):
         from django.conf import settings
         import django
 
+        db_host = os.environ.get('DJANGO_DB_HOST')
         db_engine = os.environ.get('DJANGO_DB_ENGINE', 'sqlite')
         db_user = os.environ.get('DJANGO_DB_USER')
+        db_pass = os.environ.get('DJANGO_DB_PASSWORD')
+
         if db_engine == 'mysql':
             db_settings = {
                 'ENGINE': 'django.db.backends.mysql',
                 'NAME': 'testdb',
-                'USER': db_user or 'travis',
+                'USER': db_user or 'root',
+                'HOST': db_host,
+                'PASSWORD': db_pass
             }
         elif db_engine == 'postgres':
             db_settings = {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
                 'NAME': 'testdb',
                 'USER': db_user or 'postgres',
+                'HOST': db_host,
+                'PASSWORD': db_pass
             }
         elif db_engine == 'sqlite':
             db_settings = {
