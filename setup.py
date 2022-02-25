@@ -2,9 +2,9 @@
 import os
 import sys
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
 from setuptools.command.test import test as TestCommand
-
 
 tests_require = (
     'pytest<5.0',
@@ -13,9 +13,8 @@ tests_require = (
 
 
 install_requires = (
-    'Django>=1.11,<3.1',
+    'Django>=2.2,<3.3',
     'richenum',
-    'six',
 )
 
 
@@ -29,9 +28,9 @@ class DjangoTest(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
+        import django
         import pytest
         from django.conf import settings
-        import django
 
         db_host = os.environ.get('DJANGO_DB_HOST')
         db_engine = os.environ.get('DJANGO_DB_ENGINE', 'sqlite')
@@ -87,7 +86,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='3.8.0',
+    version='3.9.0',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +
@@ -106,6 +105,9 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     keywords='python django enum richenum',

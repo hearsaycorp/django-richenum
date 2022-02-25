@@ -1,12 +1,10 @@
 from abc import ABCMeta
 from abc import abstractmethod
-import six
 
 from django import forms
 from django.core.exceptions import ValidationError
-
-from richenum import EnumLookupError, OrderedRichEnumValue
-
+from richenum import EnumLookupError
+from richenum import OrderedRichEnumValue
 
 try:
     from django.forms.fields import RenameFieldMethods  # pylint: disable=no-name-in-module
@@ -76,7 +74,7 @@ class _BaseCanonicalField(_BaseEnumField):
 
     # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
     def valid_value(self, value):
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             value = self.coerce_value(value)
         return super(_BaseCanonicalField, self).valid_value(value)
 
@@ -98,7 +96,7 @@ class _BaseIndexField(_BaseEnumField):
     # In Django 1.6, value is coerced already. Below 1.6, we need to manually coerce
     def valid_value(self, value):
         # In < Dango 1.6, this comes in as a string, so we should flip it to be an int
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             try:
                 value = int(value)
             except ValueError as e:
