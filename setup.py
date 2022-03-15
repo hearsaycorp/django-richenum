@@ -2,20 +2,19 @@
 import os
 import sys
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
-
 tests_require = (
-    'pytest<5.0',
+    'pytest>=6.2.5,<7.2',
     'pytest-django',
 )
 
 
 install_requires = (
-    'Django>=1.11,<3.1',
+    'Django>=2.2,<3.3',
     'richenum',
-    'six',
 )
 
 
@@ -29,9 +28,9 @@ class DjangoTest(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
+        import django
         import pytest
         from django.conf import settings
-        import django
 
         db_host = os.environ.get('DJANGO_DB_HOST')
         db_engine = os.environ.get('DJANGO_DB_ENGINE', 'sqlite')
@@ -65,6 +64,7 @@ class DjangoTest(TestCommand):
         settings.configure(
             DEBUG=True,
             DATABASES={'default': db_settings},
+            SECRET_KEY=os.environ.get('SECRET_KEY'),
             CACHES={
                 'default': {
                     'BACKEND': 'django.core.cache.backends.dummy.DummyCache'
@@ -87,7 +87,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='3.8.0',
+    version='4.0.0',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +
@@ -96,16 +96,10 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
-        'Framework :: Django :: 1.11',
-        'Framework :: Django :: 2.1',
-        'Framework :: Django :: 2.2',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     keywords='python django enum richenum',

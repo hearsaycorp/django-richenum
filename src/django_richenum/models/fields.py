@@ -1,8 +1,6 @@
-import six
-
 from django.db import models
-
-from richenum import RichEnumValue, OrderedRichEnumValue
+from richenum import OrderedRichEnumValue
+from richenum import RichEnumValue
 
 
 # https://github.com/django/django/blob/64200c14e0072ba0ffef86da46b2ea82fd1e019a/django/db/models/fields/subclassing.py#L31-L44
@@ -61,7 +59,7 @@ class IndexEnumField(models.IntegerField):
             return None
         elif isinstance(value, OrderedRichEnumValue):
             return value.index
-        elif isinstance(value, six.integer_types):
+        elif isinstance(value, int):
             return value
         else:
             raise TypeError('Cannot convert value: %s (%s) to an int.' % (value, type(value)))
@@ -80,7 +78,7 @@ class IndexEnumField(models.IntegerField):
             return None
         elif isinstance(value, OrderedRichEnumValue):
             return value
-        elif isinstance(value, six.integer_types):
+        elif isinstance(value, int):
             return self.enum.from_index(value)
         else:
             raise TypeError('Cannot interpret %s (%s) as an OrderedRichEnumValue.' % (value, type(value)))
@@ -114,19 +112,19 @@ class LaxIndexEnumField(IndexEnumField):
     Mainly used to help migrate existing code that uses strings as database values.
     '''
     def get_prep_value(self, value):
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return self.enum.from_canonical(value).index
         return super(LaxIndexEnumField, self).get_prep_value(value)
 
     def from_db_value(self, value, expression, connection, *args):
         # context param is deprecated in Django 2.x will be removed in Django 3.x
         # having *args allows this code to run in Django 1.x and Django 2.x
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return self.enum.from_canonical(value)
         return super(LaxIndexEnumField, self).from_db_value(value, expression, connection, *args)
 
     def to_python(self, value):
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return self.enum.from_canonical(value)
         return super(LaxIndexEnumField, self).to_python(value)
 
@@ -170,7 +168,7 @@ class CanonicalNameEnumField(models.CharField):
             return None
         elif isinstance(value, RichEnumValue):
             return value.canonical_name
-        elif isinstance(value, six.string_types):
+        elif isinstance(value, str):
             return value
         else:
             raise TypeError('Cannot convert value: %s (%s) to a string.' % (value, type(value)))
@@ -189,7 +187,7 @@ class CanonicalNameEnumField(models.CharField):
             return None
         elif isinstance(value, RichEnumValue):
             return value
-        elif isinstance(value, six.string_types):
+        elif isinstance(value, str):
             return self.enum.from_canonical(value)
         else:
             raise TypeError('Cannot interpret %s (%s) as an RichEnumValue.' % (value, type(value)))
