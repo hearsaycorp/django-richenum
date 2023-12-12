@@ -7,13 +7,13 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 tests_require = (
-    'pytest>=6.2.5,<7.2',
+    'pytest>=6.2.5,<7.5',
     'pytest-django',
 )
 
 
 install_requires = (
-    'Django>=2.2,<3.3',
+    'Django>=3.2,<=4.2',
     'richenum',
 )
 
@@ -87,7 +87,7 @@ class DjangoTest(TestCommand):
 
 setup(
     name='django-richenum',
-    version='4.0.0',
+    version='4.1.0',
     description='Django Enum library for python.',
     long_description=(
         open('README.rst').read() + '\n\n' +
@@ -96,10 +96,10 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     keywords='python django enum richenum',

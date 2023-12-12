@@ -1,6 +1,13 @@
 Changelog
 =========
 
+4.1.0 (2023-12-12)
+------------------
+    - Support for Django 4.2
+    - Support for Python 3.11
+    - Remove support for Django 2.2, 3.0, 3.1
+    - Remove support for Python 3.7
+
 3.7.0 (2019-09-05)
 ------------------
     - Support for Django 2.3
