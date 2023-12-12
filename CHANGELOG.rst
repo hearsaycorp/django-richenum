@@ -7,6 +7,7 @@ Changelog
     - Support for Python 3.11
     - Remove support for Django 2.2, 3.0, 3.1
     - Remove support for Python 3.7
+    - Require MySQL 8 and Postgres 12 
 
 3.7.0 (2019-09-05)
 ------------------
