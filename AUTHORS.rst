@@ -9,3 +9,4 @@ Contributors
 | `Robert MacCloy <https://github.com/rbm>`_
 | `Ben Lopatin <https://github.com/bennylope>`_
 | `Asher Foa <https://github.com/asherf>`_
+| `Krisztian Csizmazia <https://github.com/csizmaziakiki>`_

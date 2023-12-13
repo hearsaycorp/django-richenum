@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
-from django.utils.encoding import smart_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import smart_str
+from django.utils.translation import gettext_lazy as _
 
 from ..forms.fields import IndexEnumField as IndexEnumFormField
 from ..forms.fields import CanonicalEnumField as CanonicalNameEnumFormField
@@ -47,7 +47,7 @@ class RichEnumFieldListFilter(admin.FieldListFilter):
 
         for lookup, title in choices:
             yield {
-                "selected": smart_text(lookup) == self.lookup_val,
+                "selected": smart_str(lookup) == self.lookup_val,
                 "query_string": cl.get_query_string({
                     self.lookup_kwarg: lookup}),
                 "display": title,
