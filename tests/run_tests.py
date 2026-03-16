@@ -23,7 +23,7 @@ def _db_settings():
         }
     if db_engine == "postgres":
         return {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "ENGINE": "django.db.backends.postgresql",
             "NAME": "testdb",
             "USER": db_user or "postgres",
             "HOST": db_host,
@@ -54,7 +54,7 @@ def main():
             DATABASES={"default": _db_settings()},
             SECRET_KEY=os.environ.get("SECRET_KEY", "placeholder"),
             CACHES={"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}},
-            MIDDLEWARE_CLASSES=["django.middleware.common.CommonMiddleware"],
+            MIDDLEWARE=["django.middleware.common.CommonMiddleware"],
             INSTALLED_APPS=(
                 "django.contrib.admin",
                 "django.contrib.auth",

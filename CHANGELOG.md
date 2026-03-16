@@ -1,6 +1,12 @@
 # Changelog
 
-## 5.1.0 (2023-3-4)
+## 5.2.0 (2026-03-16)
+- Add support for Python 3.14
+- Add support for Django 5.2
+- Drop support for Python versions below 3.11
+- Drop support for Django versions below 4.2
+
+## 5.1.0 (2026-3-16)
 - Migrate to poetry
 
 ## 4.1.0 (2023-12-12)

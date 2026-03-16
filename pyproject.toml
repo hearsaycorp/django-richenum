@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-richenum"
-version = "5.1.0"
+version = "5.2.0"
 description = "Django Enum library for python."
 authors = ["Hearsay Social <opensource@hearsaysocial.com>"]
 license = "MIT"
@@ -10,19 +10,22 @@ repository = "https://github.com/hearsaycorp/django-richenum"
 keywords = ["python", "django", "enum", "richenum"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.2",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: Implementation :: CPython",
 ]
 packages = [{ include = "django_richenum", from = "src" }]
 include = ["LICENSE.txt", "AUTHORS.md", "CHANGELOG.md"]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0"
-Django = ">=3.2,<4.3"
+python = ">=3.11,<4.0"
+Django = ">=4.2,<5.3"
 richenum = "*"
 
 [tool.poetry.group.dev.dependencies]
